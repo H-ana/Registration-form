@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Card, Row, Col } from 'react-bootstrap';
+import { FaArrowLeft } from 'react-icons/fa';
 import './UserDetails.css'; 
 
 function UserDetails() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -20,7 +22,10 @@ function UserDetails() {
 
     return (
         <Container className="mt-5 user-details-container">
-            <Card className="user-details-card">
+            <div className="back-button" onClick={() => navigate('/users')}>
+                <FaArrowLeft size={24} />
+            </div>
+            <Card className="user-details-card mt-3">
                 <Row noGutters>
                     <Col md={4} className="text-center">
                         <img

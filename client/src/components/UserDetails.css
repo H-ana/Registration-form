@@ -41,3 +41,17 @@
 .user-details-info strong {
     color: #495057;
 }
+
+.back-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.back-button svg {
+    margin-right: 0.5rem;
+}
