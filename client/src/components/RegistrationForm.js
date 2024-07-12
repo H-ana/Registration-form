@@ -14,7 +14,7 @@ function RegistrationForm() {
         gender: 'male', 
         phoneNumber: '',
         address: '',
-        photo: null, // Add photo to form data
+        photo: null, 
     });
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ function RegistrationForm() {
         if (name === 'photo') {
             setFormData({
                 ...formData,
-                photo: files[0], // Handle photo upload
+                photo: files[0], 
             });
         } else {
             setFormData({
