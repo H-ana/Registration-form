@@ -17,7 +17,12 @@ function UserList() {
 
     return (
         <Container className="mt-5">
-            <Table striped bordered hover >
+            <div className='det'>
+            <div>
+            <h1>UserList</h1>
+            </div>
+            <div>
+            <Table striped bordered hover responsive className="table-custom">
                 <thead className="thead-dark">
                     <tr>
                         <th>Username</th>
@@ -41,6 +46,8 @@ function UserList() {
                     ))}
                 </tbody>
             </Table>
+            </div>
+            </div>
         </Container>
     );
 }

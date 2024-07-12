@@ -20,3 +20,7 @@ h1 {
 .table-hover tbody tr:hover {
     background-color: #f8f9fa;
 }
+
+.table-custom {
+    width: 100vh;
+}
