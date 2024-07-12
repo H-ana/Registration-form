@@ -19,7 +19,7 @@ function UserList() {
         <Container className="mt-5">
             <div className='det'>
             <div>
-            <h1>UserList</h1>
+            <h1>Users</h1>
             </div>
             <div>
             <Table striped bordered hover responsive className="table-custom">

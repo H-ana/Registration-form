@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 
 const registerUser = async (req, res) => {
     const { username, email, password, name, age, gender, phoneNumber, address } = req.body;
+    const photo = req.file ? req.file.filename : null;
 
     console.log('Received registration data:', req.body);
 
@@ -23,7 +24,7 @@ const registerUser = async (req, res) => {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, email, password: hashedPassword, name, age, gender, phoneNumber, address });
+        const newUser = new User({ username, email, password: hashedPassword, name, age, gender, phoneNumber, address, photo });
         await newUser.save();
         console.log('User saved:', newUser);
         res.status(201).json(newUser);

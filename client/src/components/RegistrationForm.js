@@ -14,15 +14,24 @@ function RegistrationForm() {
         gender: 'male', 
         phoneNumber: '',
         address: '',
+        photo: null, // Add photo to form data
     });
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value, files } = e.target;
+        if (name === 'photo') {
+            setFormData({
+                ...formData,
+                photo: files[0], // Handle photo upload
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
     };
 
     const validateForm = () => {
@@ -58,8 +67,17 @@ function RegistrationForm() {
             return;
         }
 
+        const formDataToSend = new FormData();
+        Object.keys(formData).forEach((key) => {
+            formDataToSend.append(key, formData[key]);
+        });
+
         try {
-            const res = await axios.post('http://localhost:5000/register', formData);
+            const res = await axios.post('http://localhost:5000/register', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             console.log('Registration response:', res.data);
             if (res.data) {
                 navigate('/users');
@@ -172,6 +190,17 @@ function RegistrationForm() {
                                 <option value="other">Other</option>
                             </Form.Control>
                             {errors.gender && <Alert variant="danger">{errors.gender}</Alert>}
+                        </Form.Group>
+                    </Row>
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="formPhoto">
+                            <Form.Label>Photo</Form.Label>
+                            <Form.Control
+                                type="file"
+                                name="photo"
+                                onChange={handleChange}
+                            />
+                            {errors.photo && <Alert variant="danger">{errors.photo}</Alert>}
                         </Form.Group>
                     </Row>
                     <div className="d-flex justify-content-center">

@@ -28,17 +28,25 @@ function UserDetails() {
             <Card className="user-details-card mt-3">
                 <Row noGutters>
                     <Col md={4} className="text-center">
-                        <img
-                            src={`${process.env.PUBLIC_URL}/images/image.png`}
-                            alt="Profile"
-                            className="user-details-image"
-                        />
+                        {user.photo ? (
+                            <img
+                                src={`http://localhost:5000/uploads/${user.photo}`}
+                                alt="Profile"
+                                className="user-details-image"
+                            />
+                        ) : (
+                            <img
+                                src={`${process.env.PUBLIC_URL}/images/image.png`}
+                                alt="Profile"
+                                className="user-details-image"
+                            />
+                        )}
                     </Col>
                     <Col md={8}>
                         <Card.Body>
                             <Card.Title className="user-details-title">{user.username}</Card.Title>
-                            <Card.Text><strong>Email:</strong> {user.email}</Card.Text>
                             <Card.Text><strong>Name:</strong> {user.name}</Card.Text>
+                            <Card.Text><strong>Email:</strong> {user.email}</Card.Text>
                             <Card.Text><strong>Age:</strong> {user.age}</Card.Text>
                             <Card.Text><strong>Gender:</strong> {user.gender}</Card.Text>
                             <Card.Text><strong>Phone Number:</strong> {user.phoneNumber}</Card.Text>

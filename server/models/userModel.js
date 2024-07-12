@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     gender: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     address: { type: String, required: true },
+    photo: { type: String, required: false },
 });
 
 const User = mongoose.model('User', userSchema);
