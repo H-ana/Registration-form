@@ -24,3 +24,40 @@ h1 {
 .table-custom {
     width: 100vh;
 }
+
+.user-details-container {
+    position: relative;
+}
+
+.logout-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.back-button {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+.user-details-card {
+    margin-top: 60px; 
+}
+
+.user-details-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.user-details-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Card, Row, Col } from 'react-bootstrap';
+import { Container, Card, Row, Col, Button, Alert } from 'react-bootstrap';
 import { FaArrowLeft } from 'react-icons/fa';
 import './UserDetails.css'; 
 
@@ -9,14 +9,34 @@ function UserDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await axios.get(`http://localhost:5000/users/${id}`);
-            setUser(res.data);
+            try {
+                const res = await axios.get(`http://localhost:5000/users/${id}`, {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
+                setUser(res.data);
+            } catch (err) {
+                setError(err.response ? err.response.data.error : 'An error occurred');
+                if (err.response && err.response.status === 403) {
+                    localStorage.removeItem('token');
+                    navigate('/login');
+                }
+            }
         };
         fetchUser();
-    }, [id]);
+    }, [id, navigate]);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/login');
+    };
+
+    if (error) {
+        return <Alert variant="danger">{error}</Alert>;
+    }
 
     if (!user) return <div>Loading...</div>;
 
@@ -25,6 +45,9 @@ function UserDetails() {
             <div className="back-button" onClick={() => navigate('/users')}>
                 <FaArrowLeft size={24} />
             </div>
+            <Button variant="danger" onClick={handleLogout} className="logout-button">
+                Logout
+            </Button>
             <Card className="user-details-card mt-3">
                 <Row noGutters>
                     <Col md={4} className="text-center">

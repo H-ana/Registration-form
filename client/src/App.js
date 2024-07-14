@@ -1,18 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import RegistrationForm from './components/RegistrationForm';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import UserList from './components/UserList';
 import UserDetails from './components/UserDetails';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import RegistrationForm from './components/RegistrationForm';
+import LoginForm from './components/LoginForm';
 
 function App() {
+    const isAuthenticated = !!localStorage.getItem('token');
+
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<RegistrationForm />} />
-                <Route path="/users" element={<UserList />} />
-                <Route path="/users/:id" element={<UserDetails />} />
-            </Routes>
+            <div>
+                <Routes>
+                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/register" element={<RegistrationForm />} />
+                    <Route path="/users" element={isAuthenticated ? <UserList /> : <Navigate to="/login" />} />
+                    <Route path="/users/:id" element={isAuthenticated ? <UserDetails /> : <Navigate to="/login" />} />
+                    <Route path="/" element={<Navigate to="/login" />} />
+                </Routes>
+            </div>
         </Router>
     );
 }
