@@ -30,3 +30,19 @@ button {
     top: 50%;
     transform: translateY(-50%);
 }
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.login-button {
+    margin-top: 0.5cm; 
+}

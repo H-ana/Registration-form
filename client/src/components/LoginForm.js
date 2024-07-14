@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Alert, Container, Card } from 'react-bootstrap';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './LoginForm.css';
 
 function LoginForm() {
@@ -77,18 +78,14 @@ function LoginForm() {
                                 value={formData.password}
                                 onChange={handleChange}
                             />
-                            <Button
-                                variant="secondary"
-                                onClick={togglePasswordVisibility}
-                                className="toggle-password"
-                            >
-                                {showPassword ? "Hide" : "Show"}
-                            </Button>
+                            <span className="password-icon" onClick={togglePasswordVisibility}>
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </span>
                         </div>
                         {errors.password && <Alert variant="danger">{errors.password}</Alert>}
                     </Form.Group>
                     <div className="d-flex justify-content-center">
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" className="login-button">
                             Login
                         </Button>
                     </div>
